@@ -80,7 +80,7 @@ int main(int argc, char*argv[])
         {
             MPI_Send(&sv, sizeof(sv), MPI_BYTE, rnkCnt, 0, MPI_COMM_WORLD);
         }
-
+        printf(" -1 ");
         AData =(double **) malloc( splitsz *sizeof(double *));
         int i=0;
         for (i=0;i<ArrSZ;i++)
@@ -112,19 +112,21 @@ int main(int argc, char*argv[])
                     }
                     rowcnt++;
                 }
-            }
+            }printf(" -1 ");
             int arrSplitsz = ArrSZ* splitsz;
             if(    rnkCnt!=MASTER           )
             {
                 MPI_Send(&SplitArr, arrSplitsz,MPI_DOUBLE,  rnkCnt,0,MPI_COMM_WORLD);
             }
         }
+        printf(" -2 ");
         // Fill and send Bdata  // need to come up with better plan for this
         BData =(double **) malloc( ArrSZ *sizeof(double *));
         for (i=0;i<ArrSZ;i++)
         {
             BData[i] = (double *)malloc(ArrSZ * sizeof(double));
         }
+        printf(" -3 ");
         for(rnkCnt =0;rnkCnt<num_proc;rnkCnt++ )
         {
             for(cnt =0; cnt++;cnt<ArrSZ )
@@ -154,6 +156,7 @@ int main(int argc, char*argv[])
             {
                 MPI_Send(&BArr, arrsz,MPI_DOUBLE,  rnkCnt,0,MPI_COMM_WORLD);
             }
+
         }
         // send needed info
         
