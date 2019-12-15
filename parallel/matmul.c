@@ -116,7 +116,7 @@ int main(int argc, char*argv[])
             int arrSplitsz = ArrSZ* splitsz;
             if(    rnkCnt!=MASTER           )
             {
-                MPI_Send(&SplitArr, arrSplitsz,MPI_DOUBLE,  rnkCnt,0,MPI_COMM_WORLD);
+                MPI_Send(SplitArr, arrSplitsz,MPI_DOUBLE,  rnkCnt,0,MPI_COMM_WORLD);
             }
         }
         printf(" -2 ");
@@ -154,7 +154,7 @@ int main(int argc, char*argv[])
             int arrsz = ArrSZ* ArrSZ;
             if(    rnkCnt!=MASTER           )
             {
-                MPI_Send(&BArr, arrsz,MPI_DOUBLE,  rnkCnt,0,MPI_COMM_WORLD);
+                MPI_Send(BArr, arrsz,MPI_DOUBLE,  rnkCnt,0,MPI_COMM_WORLD);
             }
 
         }
@@ -173,7 +173,7 @@ int main(int argc, char*argv[])
         MPI_Recv(&AData,aLen, MPI_DOUBLE,MASTER,0,MPI_COMM_WORLD, &status );
         int bLen =  sv.RwclLn* sv.RwclLn;
         printf("recv 3 rnk %d", rank);
-        MPI_Recv(&BData,aLen, MPI_DOUBLE,MASTER,0,MPI_COMM_WORLD, &status );
+        MPI_Recv(&BData,bLen, MPI_DOUBLE,MASTER,0,MPI_COMM_WORLD, &status );
     }
     CData =(double **) malloc( sv.SliceLn *sizeof(double *));
     int i=0;
@@ -227,7 +227,7 @@ int main(int argc, char*argv[])
     }
     else
     {
-        MPI_Send(&CData, ( sv.RwclLn* sv.SliceLn) ,MPI_DOUBLE,  MASTER,0,MPI_COMM_WORLD);
+        MPI_Send(CData, ( sv.RwclLn* sv.SliceLn) ,MPI_DOUBLE,  MASTER,0,MPI_COMM_WORLD);
     }
     
     MPI_Finalize(); 
