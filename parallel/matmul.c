@@ -162,12 +162,7 @@ int main(int argc, char*argv[])
     
     
     
-    }
-    MPI_Barrier(MPI_COMM_WORLD);
-    // needed data structures
-    
-    if( rank!=MASTER)
-    {
+    }else{
         MPI_Recv(&sv, sizeof(sv), MPI_BYTE, 0, 0, MPI_COMM_WORLD,MPI_STATUS_IGNORE);
         int aLen = sv.SliceLn * sv.RwclLn;
         MPI_Recv(&AData,aLen, MPI_DOUBLE,MASTER,0,MPI_COMM_WORLD, &status );
