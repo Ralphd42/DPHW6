@@ -34,7 +34,8 @@ int main(int argc, char*argv[])
     if(rc!=MPI_SUCCESS)
     {
         printf("Failed to start MPI");
-        MPI_Abort(MPI_COMM_WORLD,rc);    
+        MPI_Abort(MPI_COMM_WORLD,rc); 
+        exit(1);   
     }
     
     MPI_Comm_size(MPI_COMM_WORLD,&num_proc);
@@ -46,11 +47,14 @@ int main(int argc, char*argv[])
         if(argc<4)
         {
             perror("\nUsage ./matmul ARRAY DIM <A inputfile.csv> <B inputfile.csv> \n");
-            exit(-1);
+            MPI_Abort(MPI_COMM_WORLD,rc);
+             exit(1);
         }
         char * Afilename= argv[2];
         char * Bfilename= argv[3];
         int ArrSZ = atoi(argv[1]);
+
+
         // remember AData
         if( ArrSZ%num_proc!=0)
         {
