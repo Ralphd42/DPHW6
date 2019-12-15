@@ -166,10 +166,13 @@ int main(int argc, char*argv[])
     
     
     }else{
+        printf("recv 1 rnk %d", rank);
         MPI_Recv(&sv, sizeof(sv), MPI_BYTE, 0, 0, MPI_COMM_WORLD,MPI_STATUS_IGNORE);
         int aLen = sv.SliceLn * sv.RwclLn;
+        printf("recv 2 rnk %d", rank);
         MPI_Recv(&AData,aLen, MPI_DOUBLE,MASTER,0,MPI_COMM_WORLD, &status );
         int bLen =  sv.RwclLn* sv.RwclLn;
+        printf("recv 3 rnk %d", rank);
         MPI_Recv(&BData,aLen, MPI_DOUBLE,MASTER,0,MPI_COMM_WORLD, &status );
     }
     CData =(double **) malloc( sv.SliceLn *sizeof(double *));
