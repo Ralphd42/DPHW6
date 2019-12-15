@@ -29,7 +29,7 @@ int main(int argc, char*argv[])
       sprintf(comma, "%s", ",");;
     }
       fprintf(fp, "\r\n");
-  }
+  }/*
 fprintf(fp, "\r\n");
   for(i=0;i<matrixSize;i++)
   {
@@ -52,7 +52,7 @@ fprintf(fp, "\r\n");
     }
       fprintf(fp, "\r\n");
   }
-
+*/
   fclose(fp);
 
 }
